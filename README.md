@@ -1,5 +1,5 @@
 # kioptrix-full-walkthrough
-<h1>Kioptrix Level 1</h1>
+## Kioptrix Level 1
 
 Step 1:
 Downloading machine and setting up.
