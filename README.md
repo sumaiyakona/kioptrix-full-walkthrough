@@ -1,5 +1,5 @@
 # kioptrix-full-walkthrough
-## Kioptrix Level 1
+<h1>Kioptrix Level 1</h1>
 
 Step 1:
 Downloading machine and setting up.
@@ -38,7 +38,7 @@ Search for the exploit via searchsploit
 
 ![image](https://user-images.githubusercontent.com/31168741/199801410-e466b70b-3dce-477a-8ceb-eea0ec90c4aa.png)
 
-<h2>Modify the exploit code:</h2>
+## Modify the exploit code:
 
 Simply make a copy of the <b>764.c</b> exploit and put it somewhere to check it out and make changes to it (because the ‘off-the-shell’ code over there is pretty outdated)
 
