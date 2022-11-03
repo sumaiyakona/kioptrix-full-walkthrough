@@ -94,7 +94,8 @@ Run nmap scan on the machine IP that we found.
 
 Step 4:
 Let’s take a deeper dive by inspecting what lies in the open port i.e. <i><b>[machine-ip]</b></i>:80
-\nN.B. I reinstalled the machine, ts why the ip changed.
+
+<b>N.B.</b> I reinstalled the machine, ts why the ip changed.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806234-c60c90b3-8521-469f-99b3-da5d9e2a0486.png)
 
