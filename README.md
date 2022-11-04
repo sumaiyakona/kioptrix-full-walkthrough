@@ -187,7 +187,7 @@ Then, a login form. Interesting!
 
 ![image](https://user-images.githubusercontent.com/31168741/199954281-f0aa41bb-c4ff-4168-a6a0-cb6a3955fcf1.png)
 
-We could always try the step above if something lies there, will show up! Seems the effort didn't go in vain at all.
+We could always try the step above by simply adding ***../../../etc/passwd*** and ***%00pdf*** if something lies there, will show up! Seems the effort didn't go in vain at all.
 
 Step 7: Exploitation
 
