@@ -1,4 +1,6 @@
 # kioptrix-full-walkthrough
+It's a pretty much famous one to get started with and can be easily found in here: https://www.vulnhub.com/. In my opinion, this is a very well made box to have a good enough knowledge about penetration testing with learning most of the basic tools we'll need to operate in a daily basis. Hope I could match your understanding with the writeup! Here's to solving many more!
+
 <h1>Kioptrix Level 1</h1>
 
 Step 1:
