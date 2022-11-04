@@ -271,12 +271,33 @@ Oops none!
 
 ![image](https://user-images.githubusercontent.com/31168741/199957202-d3eba19e-7aef-4faa-b90e-5f0c0372af3b.png)
 
-Switching to the other user, we read CompanyPolicy.README from the /home/loneferret directory and as per the instruction, issued the sudo ht command.
+Switching to the other user, we read ***CompanyPolicy.README*** from the **/home/loneferret** directory and as per the instruction, issued the `sudo ht` command.
 
 ![image](https://user-images.githubusercontent.com/31168741/199957221-4569a06d-ba01-4be1-b54f-471fea659147.png)
+
+Unfortunately, an error shows while opening the terminal with *xterm-256color*. Doing some research helped me determine that if the `export TERM=xterm` command was used, it would bypass the *xterm-256color* error.
+
 ![image](https://user-images.githubusercontent.com/31168741/199957234-862ae621-1a0c-467d-b60a-f5c9a3529716.png)
+
+After that, re-issuing the `sudo ht` command launched it without any issue.
+
 ![image](https://user-images.githubusercontent.com/31168741/199957253-f9d08b6d-6660-489b-9ff7-4f5320d6181c.png)
+
+The *ht editor* opens within the terminal window. At this point, we should be able to open any file with root permissions.
+
 ![image](https://user-images.githubusercontent.com/31168741/199957272-9fcd6fb1-2055-48ba-9add-457f5abcb743.png)
+
+Using the function keys to navigate, I opened **(F3 to open)** the */etc/sudoers* file that allowed me to add root privileged commands for the **loneferret** account.
+
 ![image](https://user-images.githubusercontent.com/31168741/199957285-e0b220bf-f440-4c2c-a103-5a63d33b0c8a.png)
+
+With the */etc/sudoers* file open, the **loneferret** account already had a line item with root privileges to two commands that did not require a password entry. In order to obtain root privileges for the **loneferret** account, we add `/bin/sh` directly after `/usr/local/bin/ht`. This provided root access to the **sh** shell.
+
+Next we save the file and quit. Within the terminal, issuing the `sudo /bin/sh` command, the prompt changes to a **#** sign which already indicates we're in root. But to be sure let's type in `id` and `whoami` accordingly to validate root access.
+
+## Capturing the Flag:
+Once obtaining root access, it was a matter of changing to the `/root` directory and performing a list. Read the contents of **Congrats.txt**.
+
 ![image](https://user-images.githubusercontent.com/31168741/199957301-1b0a4590-2c86-43d4-8194-ec8e6feeed40.png)
 
+We solved yay!
