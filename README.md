@@ -291,13 +291,15 @@ Using the function keys to navigate, I opened **(F3 to open)** the */etc/sudoers
 
 ![image](https://user-images.githubusercontent.com/31168741/199957285-e0b220bf-f440-4c2c-a103-5a63d33b0c8a.png)
 
-With the */etc/sudoers* file open, the **loneferret** account already had a line item with root privileges to two commands that did not require a password entry. In order to obtain root privileges for the **loneferret** account, we add `/bin/sh` directly after `/usr/local/bin/ht`. This provided root access to the **sh** shell.
-
-Next we save the file and quit. Within the terminal, issuing the `sudo /bin/sh` command, the prompt changes to a **#** sign which already indicates we're in root. But to be sure let's type in `id` and `whoami` accordingly to validate root access.
+With the ***/etc/sudoers*** file open, the **loneferret** account already had a line item with root privileges to two commands that did not require a password entry. In order to obtain root privileges for the **loneferret** account, we add `/bin/sh` directly after `/usr/local/bin/ht`. This provided root access to the **sh** shell. Next we save the file and quit.
 
 ## Capturing the Flag:
-Once obtaining root access, it was a matter of changing to the `/root` directory and performing a list. Read the contents of **Congrats.txt**.
+Within the terminal, issuing the `sudo /bin/sh` command, the prompt changes to a **#** sign which already indicates we're in root. But to be sure let's type in `id` and `whoami` accordingly to validate root access. Once obtaining root access, it was a matter of changing to the `/root` directory and performing a list.
 
 ![image](https://user-images.githubusercontent.com/31168741/199957301-1b0a4590-2c86-43d4-8194-ec8e6feeed40.png)
+
+Read the contents of **Congrats.txt**.
+
+![image](https://user-images.githubusercontent.com/31168741/199996040-448c8413-2410-4515-aea9-32662197e472.png)
 
 We solved yay!
