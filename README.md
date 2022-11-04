@@ -227,7 +227,44 @@ Step 8:
 On another note, we find out, kioptrix3.com/gallery, let’s look into that!
 
 ![1](https://user-images.githubusercontent.com/31168741/199956198-94b4f909-fe87-4d1c-80b9-3e46039317f3.PNG)
-
 ![1](https://user-images.githubusercontent.com/31168741/199956287-5dbe1054-01a6-4e3d-926e-40ad9e16ba47.PNG)
+![1](https://user-images.githubusercontent.com/31168741/199956549-19251424-d62e-4eb7-9a71-b154b4efb088.PNG)
+![1](https://user-images.githubusercontent.com/31168741/199956655-de874a9a-4dd9-49b0-bfdc-db8a1883a3cd.PNG)
 
+Dumping tables by using sqlmap from the database named gallery.
+
+![image](https://user-images.githubusercontent.com/31168741/199956733-689a32cb-bc7c-4b10-873e-07d5cda81bf1.png)
+![image](https://user-images.githubusercontent.com/31168741/199956759-1816ea99-f341-4ebc-ac08-3784c5a0ca9b.png)
+
+Dumping account information reveals some userid with credentials.
+
+![image](https://user-images.githubusercontent.com/31168741/199956826-b0d40c64-76a1-4613-9d9e-53a2558bf5a1.png)
+![image](https://user-images.githubusercontent.com/31168741/199956839-8d3fcf3d-aca3-42f5-b80f-162f3137408f.png)
+
+We try to find out mysql credentials as well.
+
+![image](https://user-images.githubusercontent.com/31168741/199956901-ace08953-7d77-4f35-9c5d-92e2e31eecbb.png)
+![image](https://user-images.githubusercontent.com/31168741/199956927-33a0d7e7-7f9f-46c4-a12f-37fb3542c5b3.png)
+![image](https://user-images.githubusercontent.com/31168741/199956952-6ae6802a-b497-4445-a7d1-d2cbd3ea8949.png)
+
+Seems we succeed. The hash values can be decrypted by any online decoder or command tools such hashcat or john the ripper.
+
+![image](https://user-images.githubusercontent.com/31168741/199957016-c9891e60-21c0-4afe-a4ec-426ec47c3ff7.png)
+
+Logging in phpmyadmin seems like:
+
+![image](https://user-images.githubusercontent.com/31168741/199957067-28294548-1457-4a0e-8524-475bafc4c8a9.png)
+![image](https://user-images.githubusercontent.com/31168741/199957102-30be9ce6-0911-4baa-a3ab-6201b76e420a.png)
+
+Now logging into the machine through ssh, we find some error which later has been solved by using the below command. -oHostKeyAlgorithms=+ssh-dss
+
+![image](https://user-images.githubusercontent.com/31168741/199957169-140446a0-1d68-445b-83c0-643697469c57.png)
+![image](https://user-images.githubusercontent.com/31168741/199957184-2699b5a6-56d4-4010-898b-d97c8bf6b29e.png)
+![image](https://user-images.githubusercontent.com/31168741/199957202-d3eba19e-7aef-4faa-b90e-5f0c0372af3b.png)
+![image](https://user-images.githubusercontent.com/31168741/199957221-4569a06d-ba01-4be1-b54f-471fea659147.png)
+![image](https://user-images.githubusercontent.com/31168741/199957234-862ae621-1a0c-467d-b60a-f5c9a3529716.png)
+![image](https://user-images.githubusercontent.com/31168741/199957253-f9d08b6d-6660-489b-9ff7-4f5320d6181c.png)
+![image](https://user-images.githubusercontent.com/31168741/199957272-9fcd6fb1-2055-48ba-9add-457f5abcb743.png)
+![image](https://user-images.githubusercontent.com/31168741/199957285-e0b220bf-f440-4c2c-a103-5a63d33b0c8a.png)
+![image](https://user-images.githubusercontent.com/31168741/199957301-1b0a4590-2c86-43d4-8194-ec8e6feeed40.png)
 
