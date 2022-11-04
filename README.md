@@ -3,11 +3,9 @@ It's a pretty much famous one to get started with and can be easily found in her
 
 <h1>Kioptrix Level 1</h1>
 
-Step 1:
-Downloading machine and setting up.
+Step 1: Downloading machine and setting up.
 
-Step 2:
-Run netdiscover to learn the machine IP.
+Step 2: Run netdiscover to learn the machine IP.
 
 `sudo netdiscover -i eth0`
 
@@ -15,8 +13,7 @@ Run netdiscover to learn the machine IP.
 
 Note: Found out by the mac address.
 
-Step 3:
-Run nmap scan on the machine IP that we found.
+Step 3: Run nmap scan on the machine IP that we found.
 
 `sudo nmap -sS -A -p- [machine-ip] -T4`
 
@@ -24,18 +21,14 @@ Run nmap scan on the machine IP that we found.
 ![image](https://user-images.githubusercontent.com/31168741/199800056-715a15f8-f636-40f8-801f-0a477a7fef28.png)
 nmap result as found above!
 
-Step 4:
-Running some other tools to enumerate as much information as possible from the machine.
+Step 4: Running some other tools to enumerate as much information as possible from the machine.
 
-`enum4linux [machine-ip]`
-
+`enum4linux [machine-ip]`<br>
 `dirsearch -u http://[machine-ip]`
 
-Step 5:
-Now we browse for available exploits.
+Step 5: Now we browse for available exploits.
 
-As shown in the output, the target system is using a very outdated Apache web server version 1.3.20. We Google for **“apache 1.3.20 vulnerability”**.
-
+As shown in the output, the target system is using a very outdated Apache web server version 1.3.20. We Google for **“apache 1.3.20 vulnerability”**.<br>
 Search for the exploit via searchsploit:
 
 `searchsploit OpenFuck`
@@ -56,8 +49,7 @@ Below are the list of changes which are needed to be made to the <b>OpenFuck.c</
 
 **Include the openssl rc4 and md5 libraries:**
 
->#include <openssl/rc4.h>
-
+>#include <openssl/rc4.h><br>
 >#include <openssl/md5.h>
 
 Modify the <b>‘wget’</b> method in the exploit itself because the url does not exist anymore. we need to update it to become the new URL to download the file.
@@ -65,8 +57,7 @@ Search for <b>‘wget’</b> in the exploit, and then replace the URL to <b>http
 
 **Install Libraries for compiling the modified exploit code:**
 
-> apt-get install libssl-dev
-
+> apt-get install libssl-dev<br>
 > gcc -o OpenFuck OpenFuck.c -lcrypto
 
 Running the exploit,
@@ -79,18 +70,15 @@ It worked!
 
 <h1>Kioptrix Level 1.1(2)</h1>
 
-Step 1:
-Follow Step 1 & Step 2 from previous one as described to set the machine up and discovering machine IP.
+Step 1: Follow Step 1 & Step 2 from previous one as described to set the machine up and discovering machine IP.
 
-Step 2:
-Run nmap scan on the machine IP that we found.
+Step 2: Run nmap scan on the machine IP that we found.
 
 `sudo nmap -sS -A -p- [machine-ip] -T4`
 
 ![image](https://user-images.githubusercontent.com/31168741/199806144-1718d44e-5564-429a-8f5e-58d748009ca2.png)
 
-Step 3:
-Let’s take a deeper dive by inspecting what lies in the open port i.e. ***[machine-ip]***:80
+Step 3: Let’s take a deeper dive by inspecting what lies in the open port i.e. ***[machine-ip]***:80
 
 **N.B.** I reinstalled the machine, ts why the ip changed.
 
@@ -103,7 +91,6 @@ Whoa! A login form. From the nmap scan, we notice the web application is using u
 But we need a shell to operate more flexibly.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806351-02b40ddb-6bdf-40a1-a4ee-c683b919f39d.png)
-
 ![image](https://user-images.githubusercontent.com/31168741/199806383-709bfcfa-928e-49b6-b1fc-032eacd73d21.png)
 
 So, we setup a listener and using a BASH reverse shell to connect to the listener; putting the script below inside the console that we just took privilege:
@@ -115,11 +102,9 @@ So, we setup a listener and using a BASH reverse shell to connect to the listene
 We are into the shell! We look around for more info.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806517-f0a4fc1d-17db-4f9d-b62d-46e0f8d2f0a6.png)
-
 ![image](https://user-images.githubusercontent.com/31168741/199806565-fba7cafa-d421-4b98-9f6f-fffa2ffb736a.png)
 
-Step 4:
-Looking out for available exploits regarding the version privilege escalation.
+Step 4: Looking out for available exploits regarding the version privilege escalation.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806647-16bb2db6-10e1-43ec-8ed1-1d9c67b52842.png)
 
@@ -127,8 +112,7 @@ We find one and download the exploit.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806720-0134067b-2762-48ca-b830-ee4d28153eb8.png)
 
-Step 5:
-Running a python server in the host machine `python3 -m http.server 80` so that we can copy the exploit to the target machine.
+Step 5: Running a python server in the host machine `python3 -m http.server 80` so that we can copy the exploit to the target machine.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806805-4fb64c04-ee75-4a27-a721-e9ef97397e13.png)
 
@@ -138,8 +122,7 @@ Transferring the exploit to the target machine using the Python web server and w
 
 It’s copied. (We are downloading basically!)
 
-Step 6:
-Compiling the exploit using GCC, allocating execute permissions to it and executing it:
+Step 6: Compiling the exploit using GCC, allocating execute permissions to it and executing it:
 
 ![image](https://user-images.githubusercontent.com/31168741/199806960-7773eaf1-1689-47b7-859b-95f29d6f672e.png)
 
@@ -147,24 +130,20 @@ Now we are in the root!
 
 <h1>Kioptrix Level 1.2(3)</h1>
 
-Step 1:
-Follow Step 1 & Step 2 from previous one as described to set the machine up and discovering machine IP.
+Step 1: Follow Step 1 & Step 2 from previous one as described to set the machine up and discovering machine IP.
 
-Step 2:
-Before we move any further, we better add the domain/ip in ***/etc/hosts*** file in case, we can't reach the requested page.
+Step 2: Before we move any further, we better add the domain/ip in ***/etc/hosts*** file in case, we can't reach the requested page.
 
 ![image](https://user-images.githubusercontent.com/31168741/199953402-8d1b9972-159e-4dac-8c3e-7e064a29f61f.png)
 ![image](https://user-images.githubusercontent.com/31168741/199953427-1d9eda09-61e0-40ed-8ce9-da02fd13b5c0.png)
 
-Step 3:
-Run nmap scan on the machine IP that we found.
+Step 3: Run nmap scan on the machine IP that we found.
 
 `sudo nmap -sS -A -p- [machine-ip] -T4`
 
 ![image](https://user-images.githubusercontent.com/31168741/199953516-281d5a6a-8555-4b3b-b94f-af3abcd363bd.png)
 
-Step 4:
-Running some other tools to enumerate as much information as possible from the machine.
+Step 4: Running some other tools to enumerate as much information as possible from the machine.
 
 `dirsearch -u http://[machine-ip]`
 
@@ -174,8 +153,7 @@ Running some other tools to enumerate as much information as possible from the m
 
 ![image](https://user-images.githubusercontent.com/31168741/199953794-9606b92d-cc20-418a-bcbb-48a46a144cdc.png)
 
-Step 5:
-Just as before, let’s take a deeper dive by inspecting what lies in the open port i.e. ***[machine-ip]***:80
+Step 5: Just as before, let’s take a deeper dive by inspecting what lies in the open port i.e. ***[machine-ip]***:80
 
 ![image](https://user-images.githubusercontent.com/31168741/199954089-d3bd781b-5f7e-40d7-94aa-8b6c282e9511.png)
 
@@ -215,8 +193,7 @@ We are into the shell!
 
 But, the file we need to get into asks for the root permit and we don't have one. This would’ve worked in the past but it seems it doesn’t work anymore since this is a very old machine. So, we got only one way to get through i.e. by SQLi.
 
-Step 7:
-On another note, we find out, kioptrix3.com/gallery, let’s look into that! Showing this only because you can always find clues if you look a li'll hard. Although we found it through directory brute-force in Step 4.
+Step 7: On another note, we find out, kioptrix3.com/gallery, let’s look into that! Showing this only because you can always find clues if you look a li'll hard. Although we found it through directory brute-force in Step 4.
 
 ![1](https://user-images.githubusercontent.com/31168741/199956198-94b4f909-fe87-4d1c-80b9-3e46039317f3.PNG)
 ![1](https://user-images.githubusercontent.com/31168741/199956287-5dbe1054-01a6-4e3d-926e-40ad9e16ba47.PNG)
