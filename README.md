@@ -163,7 +163,7 @@ Run nmap scan on the machine IP that we found.
 
 ![image](https://user-images.githubusercontent.com/31168741/199953516-281d5a6a-8555-4b3b-b94f-af3abcd363bd.png)
 
-Step 5:
+Step 4:
 Running some other tools to enumerate as much information as possible from the machine.
 
 `dirsearch -u http://[machine-ip]`
@@ -174,7 +174,7 @@ Running some other tools to enumerate as much information as possible from the m
 
 ![image](https://user-images.githubusercontent.com/31168741/199953794-9606b92d-cc20-418a-bcbb-48a46a144cdc.png)
 
-Step 6:
+Step 5:
 Just as before, let’s take a deeper dive by inspecting what lies in the open port i.e. ***[machine-ip]***:80
 
 ![image](https://user-images.githubusercontent.com/31168741/199954089-d3bd781b-5f7e-40d7-94aa-8b6c282e9511.png)
@@ -189,7 +189,7 @@ Then, a login form. Interesting!
 
 We could always try the step above by simply adding ***../../../etc/passwd*** and ***%00pdf*** if something lies there, will show up! Seems the effort didn't go in vain at all.
 
-Step 7: Exploitation
+Step 6: Exploitation
 
 `searchsploit lotuscms`
 
@@ -223,15 +223,15 @@ We are into the shell!
 
 But, the file we need to get into asks for the root permit and we don't have one. This would’ve worked in the past but it seems it doesn’t work anymore since this is a very old machine. So, we got only one way to get through i.e. by SQLi.
 
-Step 8:
-On another note, we find out, kioptrix3.com/gallery, let’s look into that!
+Step 7:
+On another note, we find out, kioptrix3.com/gallery, let’s look into that! Showing this only because you can always find clues if you look a li'll hard. Although we found it through directory brute-force in Step 4.
 
 ![1](https://user-images.githubusercontent.com/31168741/199956198-94b4f909-fe87-4d1c-80b9-3e46039317f3.PNG)
 ![1](https://user-images.githubusercontent.com/31168741/199956287-5dbe1054-01a6-4e3d-926e-40ad9e16ba47.PNG)
 ![1](https://user-images.githubusercontent.com/31168741/199956549-19251424-d62e-4eb7-9a71-b154b4efb088.PNG)
 ![1](https://user-images.githubusercontent.com/31168741/199956655-de874a9a-4dd9-49b0-bfdc-db8a1883a3cd.PNG)
 
-Dumping tables by using sqlmap from the database named gallery.
+Although we could do the manual injection, I used sqlmap for a better understading and time saviour not to mention. Dumping tables from the database named **gallery**.
 
 ![image](https://user-images.githubusercontent.com/31168741/199956733-689a32cb-bc7c-4b10-873e-07d5cda81bf1.png)
 ![image](https://user-images.githubusercontent.com/31168741/199956759-1816ea99-f341-4ebc-ac08-3784c5a0ca9b.png)
@@ -241,26 +241,38 @@ Dumping account information reveals some userid with credentials.
 ![image](https://user-images.githubusercontent.com/31168741/199956826-b0d40c64-76a1-4613-9d9e-53a2558bf5a1.png)
 ![image](https://user-images.githubusercontent.com/31168741/199956839-8d3fcf3d-aca3-42f5-b80f-162f3137408f.png)
 
-We try to find out mysql credentials as well.
+We try to find out **mysql** credentials as well.
 
 ![image](https://user-images.githubusercontent.com/31168741/199956901-ace08953-7d77-4f35-9c5d-92e2e31eecbb.png)
 ![image](https://user-images.githubusercontent.com/31168741/199956927-33a0d7e7-7f9f-46c4-a12f-37fb3542c5b3.png)
 ![image](https://user-images.githubusercontent.com/31168741/199956952-6ae6802a-b497-4445-a7d1-d2cbd3ea8949.png)
 
-Seems we succeed. The hash values can be decrypted by any online decoder or command tools such hashcat or john the ripper.
+Seems we succeeded. The hash values can be decrypted by any online decoder or command tools such as *hashcat* or *john the ripper*.
 
 ![image](https://user-images.githubusercontent.com/31168741/199957016-c9891e60-21c0-4afe-a4ec-426ec47c3ff7.png)
 
 Logging in phpmyadmin seems like:
 
 ![image](https://user-images.githubusercontent.com/31168741/199957067-28294548-1457-4a0e-8524-475bafc4c8a9.png)
+
+Although we managed to get the userid and passwords by sqlmap previously, we could use this too.
+
 ![image](https://user-images.githubusercontent.com/31168741/199957102-30be9ce6-0911-4baa-a3ab-6201b76e420a.png)
 
-Now logging into the machine through ssh, we find some error which later has been solved by using the below command. -oHostKeyAlgorithms=+ssh-dss
+Now logging into the machine through ssh, we find some error which later has been solved by using the command: ***-oHostKeyAlgorithms=+ssh-dss*** as shown below.
 
 ![image](https://user-images.githubusercontent.com/31168741/199957169-140446a0-1d68-445b-83c0-643697469c57.png)
+
+We first log into the **dreg** user and see what permission we have as root by typing `sudo -l`.
+
 ![image](https://user-images.githubusercontent.com/31168741/199957184-2699b5a6-56d4-4010-898b-d97c8bf6b29e.png)
+
+Oops none!
+
 ![image](https://user-images.githubusercontent.com/31168741/199957202-d3eba19e-7aef-4faa-b90e-5f0c0372af3b.png)
+
+Switching to the other user, we read CompanyPolicy.README from the /home/loneferret directory and as per the instruction, issued the sudo ht command.
+
 ![image](https://user-images.githubusercontent.com/31168741/199957221-4569a06d-ba01-4be1-b54f-471fea659147.png)
 ![image](https://user-images.githubusercontent.com/31168741/199957234-862ae621-1a0c-467d-b60a-f5c9a3529716.png)
 ![image](https://user-images.githubusercontent.com/31168741/199957253-f9d08b6d-6660-489b-9ff7-4f5320d6181c.png)
